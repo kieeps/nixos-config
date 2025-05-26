@@ -50,6 +50,7 @@
     zoxide
     eza
     bat
+    home-manager
 
     # ZSH enhancements previously managed by oh-my-zsh
     zsh-git-prompt
