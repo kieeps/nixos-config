@@ -1,46 +1,26 @@
-# users/kieeps.nix
-{ config, pkgs, username, homeDirectory, hostname, ... }:
+
+{ config, pkgs, ... }:
 
 {
   home.username = "kieeps";
   home.homeDirectory = "/home/kieeps";
   home.stateVersion = "24.05";
 
-
-  programs.git.enable = true;
-  programs.btop.enable = true;
-
+  # ZSH shell configuration
   programs.zsh = {
     enable = true;
+    enableCompletion = true;
+    enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
+
     history = {
       path = "${config.home.homeDirectory}/.histfile";
       size = 1000;
       save = 1000;
     };
 
-    enableCompletion = true;
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
-
-    ohMyZsh = {
-      enable = true;
-      theme = "bira";
-      plugins = [
-        "git"
-        "z"
-        "sudo"
-      ];
-      customPkgs = with pkgs; [
-        zsh-git-prompt
-        zsh-nix-shell
-        zsh-completions
-        zsh-command-time
-        zsh-fast-syntax-highlighting
-        nix-zsh-completions
-      ];
-    };
-
     initExtra = ''
+      export ZSH_THEME="bira"
       setopt autocd extendedglob nomatch notify
       unsetopt beep
 
@@ -51,7 +31,9 @@
     '';
   };
 
-
+  # Git and general tools
+  programs.git.enable = true;
+  programs.btop.enable = true;
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -59,6 +41,7 @@
     vimAlias = true;
   };
 
+  # Shell utilities
   home.packages = with pkgs; [
     fastfetch
     ripgrep
@@ -66,8 +49,13 @@
     zoxide
     eza
     bat
-    home-manager
-  ];
 
-  # Host-specific NH config will be in kieeps-Lappen.nix / kieeps-Supern.nix
+    # ZSH enhancements previously managed by oh-my-zsh
+    zsh-git-prompt
+    zsh-nix-shell
+    zsh-completions
+    zsh-command-time
+    zsh-fast-syntax-highlighting
+    nix-zsh-completions
+  ];
 }
