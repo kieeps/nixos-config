@@ -13,6 +13,10 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
+    shellAliases = {
+      enix = "sudo nano /etc/nixos/configuration.nix";
+      unix = "sudo nixos-rebuild switch";
+    };
 
     history = {
       path = "${config.home.homeDirectory}/.histfile";
@@ -20,17 +24,17 @@
       save = 1000;
     };
 
-    initContent = ''
-      export ZSH_THEME="bira"
-      setopt autocd extendedglob nomatch notify
-      unsetopt beep
-
-      bindkey -e
-
-      alias enix="sudo nano /etc/nixos/configuration.nix"
-      alias unix="sudo nixos-rebuild switch"
-    '';
+    oh-my-zsh = {
+      enable = true;
+      theme = "bira";
+      plugins = [
+        "git"
+        "z"
+        "sudo"
+      ];
+    };
   };
+
 
   # Git and general tools
   programs.git.enable = true;
