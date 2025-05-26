@@ -4,6 +4,7 @@
   xdg.configFile."nh/hosts.toml".text = ''
     [default]
     config = "nixosConfigurations"
+    user = "kieeps"
     hostname = "${hostname}"
 
     [hosts.${hostname}]
