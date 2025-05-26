@@ -1,20 +1,8 @@
-
-
-
-# Edit this configuration file to define what should be installed on your system.  Help is available in the configuration.nix(5) man page and in the NixOS manual (accessible by running ‘nixos-help’).
-
-
 { config, pkgs, ... }:
-#let
-#  unstable = import inputs.nixpkgs {
-#    system = "x86_64-linux";
-#    config = config.nixpkgs.config;
-#  };
-#in
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
     ];
   fonts = {
@@ -23,18 +11,10 @@
     ];
   };
 
-#  nixpkgs.config = {
-#    packageOverrides = pkgs: {
-#      unstable = import unstableTarball {
-#        config = config.nixpkgs.config;
-#      };
-#    };
-#  };
-#  programs.zsh.enable = true;
 services.logind = {
-  lidSwitch = "suspend";        # Suspend when the lid is closed
-  lidSwitchDocked = "ignore";   # Ignore lid close when docked
-  powerKey = "suspend";         # Suspend on power button press
+  lidSwitch = "suspend";
+  lidSwitchDocked = "ignore";
+  powerKey = "suspend";
   extraConfig = ''
     HandleHibernateKey=ignore
     HandleLidSwitchHibernate=ignore
@@ -51,39 +31,12 @@ boot.binfmt.registrations.appimage = {
 };
   programs.zsh.enable = true;
 
-  # programs.zsh = {
-  #   enable = true;
-  #   enableGlobalCompInit = false;
-  #   shellAliases = {
-  #     cp = "rsync -avh --inplace --no-whole-file --no-compress --progress --info=progress2";
-  #     nanoc = "sudo nano /etc/nixos/configuration.nix";
-  #   };
-  #   ohMyZsh = {
-  #     enable = true;
-  #     theme = "bira";
-  #     customPkgs = with pkgs; [
-  #       zsh-git-prompt
-  #       zsh-nix-shell
-  #       zsh-completions
-  #       zsh-command-time
-  #       zsh-fast-syntax-highlighting
-  #       nix-zsh-completions
-  #     ];
-  #   };
-  # };
-
 # Steam
   programs.steam = {
     enable = true;
 #    extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
 
-# ADB
-  programs.adb = {
-    enable = true;
-  };
-
-#  oh-my-zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
   # Bootloader.
@@ -96,33 +49,11 @@ boot.binfmt.registrations.appimage = {
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.loader.systemd-boot.configurationLimit = 10;
-  # Vulcan
-  # hardware.opengl.driSupport = true;
-  # For 32 bit applications
-  # hardware.opengl.driSupport32Bit = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Hosts-file
-  
-#  networking.extraHosts =
-#    ''  
-#      192.168.1.34	api.kluster.kieeps.com
-#      192.168.1.35	oauth-openshift.apps.kluster.kieeps.com
-#      192.168.1.35	console-openshift-console.apps.kluster.kieeps.com
-#      192.168.1.35	grafana-openshift-monitoring.apps.kluster.kieeps.com
-#      192.168.1.35	thanos-querier-openshift-monitoring.apps.kluster.kieeps.com
-#      192.168.1.35	prometheus-k8s-openshift-monitoring.apps.kluster.kieeps.com
-#      192.168.1.35	alertmanager-main-openshift-monitoring.apps.kluster.kieeps.com
-#    '';
 
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
@@ -143,21 +74,12 @@ boot.binfmt.registrations.appimage = {
     LC_TIME = "sv_SE.UTF-8";
   };
 
-  # Teamviewer 
-#  services.teamviewer.enable = true;
-  # enable the tailscale service
   services.tailscale.enable = true;
-  # enable netbird service
-#  services.netbird.enable = true;
-  # enable TLP Service
   services.tlp.enable = true;
   services.power-profiles-daemon.enable = false;
 
   ## virtualisation
   virtualisation = {
-    waydroid = {
-      enable = false;
-    };
     containers = {
       enable = true;
     };
@@ -187,7 +109,6 @@ boot.binfmt.registrations.appimage = {
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  # services.displayManager.sddm.enable = true;
   services.displayManager.defaultSession = "plasma";
   services.xserver.displayManager = {
     lightdm = { 
@@ -196,16 +117,9 @@ boot.binfmt.registrations.appimage = {
     };
   };
 
-#  programs.hyprland = {
-#    enable = true;
-#    xwayland.enable = true;
-#  };
-
   security.polkit.enable = true;
   services.desktopManager.plasma6.enable = true;
-#  programs.kdeconnect = {
-#    enable = true;
-#  };
+
   # Configure keymap in X11
   services.xserver = {
     xkb.layout = "se";
@@ -220,7 +134,6 @@ boot.binfmt.registrations.appimage = {
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  # sound.enable = true;
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -228,19 +141,8 @@ boot.binfmt.registrations.appimage = {
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kieeps = {
     isNormalUser = true;
     description = "kieeps";
@@ -306,9 +208,6 @@ boot.binfmt.registrations.appimage = {
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "kieeps";
 
- 
-
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -319,37 +218,8 @@ environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
 ];
-  # programs.btop.enable = true;
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
 environment.sessionVariables = {
   MOZ_USE_XINPUT2 = "1";
 };
-
-
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }
