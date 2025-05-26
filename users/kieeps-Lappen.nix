@@ -1,4 +1,4 @@
-{ config, hostname, ... }:
+{ config, pkgs, hostname, ... }:
 
 {
   xdg.configFile."nh/hosts.toml".text = ''
@@ -10,7 +10,7 @@
     flake = "${config.home.homeDirectory}/nixos-config"
   '';
 
-  home.packages = [
+  home.packages = with pkgs; [
     # Laptop-specific packages
     tlp
     nextcloud-client

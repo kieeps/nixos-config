@@ -6,9 +6,51 @@
   home.homeDirectory = "/home/kieeps";
   home.stateVersion = "24.05";
 
-  programs.zsh.enable = true;
+
   programs.git.enable = true;
   programs.btop.enable = true;
+
+  programs.zsh = {
+    enable = true;
+    history = {
+      path = "${config.home.homeDirectory}/.histfile";
+      size = 1000;
+      save = 1000;
+    };
+
+    enableCompletion = true;
+    enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
+
+    ohMyZsh = {
+      enable = true;
+      theme = "bira";
+      plugins = [
+        "git"
+        "z"
+        "sudo"
+      ];
+      customPkgs = with pkgs; [
+        zsh-git-prompt
+        zsh-nix-shell
+        zsh-completions
+        zsh-command-time
+        zsh-fast-syntax-highlighting
+        nix-zsh-completions
+      ];
+    };
+
+    initExtra = ''
+      setopt autocd extendedglob nomatch notify
+      unsetopt beep
+
+      bindkey -e
+
+      alias enix="sudo nano /etc/nixos/configuration.nix"
+      alias unix="sudo nixos-rebuild switch"
+    '';
+  };
+
 
   programs.neovim = {
     enable = true;
