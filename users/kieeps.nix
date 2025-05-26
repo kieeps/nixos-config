@@ -10,8 +10,9 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    
 
     history = {
       path = "${config.home.homeDirectory}/.histfile";
