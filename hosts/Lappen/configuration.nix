@@ -5,11 +5,13 @@
 
 
 { config, pkgs, ... }:
-let
-  unstableTarball =
-    fetchTarball
-      https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
-in
+#let
+#  unstable = import inputs.nixpkgs {
+#    system = "x86_64-linux";
+#    config = config.nixpkgs.config;
+#  };
+#in
+
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -21,13 +23,13 @@ in
     ];
   };
 
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      unstable = import unstableTarball {
-        config = config.nixpkgs.config;
-      };
-    };
-  };
+#  nixpkgs.config = {
+#    packageOverrides = pkgs: {
+#      unstable = import unstableTarball {
+#        config = config.nixpkgs.config;
+#      };
+#    };
+#  };
 #  programs.zsh.enable = true;
 services.logind = {
   lidSwitch = "suspend";        # Suspend when the lid is closed
