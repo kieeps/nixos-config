@@ -12,7 +12,7 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    
+
 
     history = {
       path = "${config.home.homeDirectory}/.histfile";
@@ -20,7 +20,7 @@
       save = 1000;
     };
 
-    initExtra = ''
+    initContent = ''
       export ZSH_THEME="bira"
       setopt autocd extendedglob nomatch notify
       unsetopt beep
