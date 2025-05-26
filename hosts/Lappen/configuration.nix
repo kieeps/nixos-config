@@ -50,26 +50,26 @@ boot.binfmt.registrations.appimage = {
   magicOrExtension = ''\x7fELF....AI\x02'';
 };
 
-  programs.zsh = {
-    enable = true;
-    enableGlobalCompInit = false;
-    shellAliases = {
-      cp = "rsync -avh --inplace --no-whole-file --no-compress --progress --info=progress2";
-      nanoc = "sudo nano /etc/nixos/configuration.nix";
-    };
-    ohMyZsh = {
-      enable = true;
-      theme = "bira";
-      customPkgs = with pkgs; [
-        zsh-git-prompt
-        zsh-nix-shell
-        zsh-completions
-        zsh-command-time
-        zsh-fast-syntax-highlighting
-        nix-zsh-completions
-      ];
-    };
-  };
+  # programs.zsh = {
+  #   enable = true;
+  #   enableGlobalCompInit = false;
+  #   shellAliases = {
+  #     cp = "rsync -avh --inplace --no-whole-file --no-compress --progress --info=progress2";
+  #     nanoc = "sudo nano /etc/nixos/configuration.nix";
+  #   };
+  #   ohMyZsh = {
+  #     enable = true;
+  #     theme = "bira";
+  #     customPkgs = with pkgs; [
+  #       zsh-git-prompt
+  #       zsh-nix-shell
+  #       zsh-completions
+  #       zsh-command-time
+  #       zsh-fast-syntax-highlighting
+  #       nix-zsh-completions
+  #     ];
+  #   };
+  # };
 
 # Steam
   programs.steam = {
