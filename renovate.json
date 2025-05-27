@@ -1,6 +1,7 @@
 {
   "extends": ["config:recommended"],
   "assignees": ["kieeps"],
+  "reviewers": ["kieeps"]
   "nix": {
     "enabled": true
   },
