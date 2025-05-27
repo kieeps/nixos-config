@@ -2,6 +2,7 @@
   "extends": ["config:recommended"],
   "assignees": ["kieeps"],
   "reviewers": ["kieeps"],
+  "fetchChangelogs": true,
   "nix": {
     "enabled": true
   },
