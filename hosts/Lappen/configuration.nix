@@ -29,7 +29,7 @@ boot.binfmt.registrations.appimage = {
   mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
   magicOrExtension = ''\x7fELF....AI\x02'';
 };
-  programs.zsh.enable = true;
+#  programs.zsh.enable = true;
 
 # Steam
   programs.steam = {
@@ -37,7 +37,7 @@ boot.binfmt.registrations.appimage = {
 #    extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
 
-  users.defaultUserShell = pkgs.zsh;
+#  users.defaultUserShell = pkgs.zsh;
 
   # Bootloader.
   boot.initrd.kernelModules = [ "amdgpu" ];
