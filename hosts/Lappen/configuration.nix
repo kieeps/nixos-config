@@ -146,57 +146,17 @@ boot.binfmt.registrations.appimage = {
   users.users.kieeps = {
     isNormalUser = true;
     description = "kieeps";
-    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "podman" "render" "video" ];
-    packages = with pkgs; [
-      nh
-      kdePackages.kcalc
-      firefox
-      kdePackages.kate
-      discord
-      kdePackages.yakuake
-      google-chrome
-      signal-desktop-bin
-      git
-      htop
-      element-desktop
-      cups-brother-hl1210w
-      nextcloud-client
-      libreoffice
-      tlp
-      yubico-pam
-      nheko
-      cmatrix
-      spice
-      spice-gtk
-      moonlight-qt
-      p7zip
-      vscode
-      warp-terminal
-      android-tools
-      android-udev-rules
-      btop-rocm
-      lutris
-      vscode
-      openshift
-      kubernetes
-      kubernetes-helm
-      jmeter
-      android-tools
-      krita
-      openssl
-      zlib
-      libffi
-      gmp
-      slack
-      nixpkgs-review
-      gh
-      vlc
-     (wineWowPackages.full.override {
-       wineRelease = "staging";
-       mingwSupport = true;
-     })
-     winetricks
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "libvirtd"
+      "podman"
+      "render"
+      "video"
     ];
+    shell = pkgs.zsh;  # Optional: remove if you want HM-only, but see warning below
+    ignoreShellProgramCheck = true;  # Optional: avoids warnings if relying on HM
   };
 
   nixpkgs.config.permittedInsecurePackages = [

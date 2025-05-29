@@ -48,13 +48,52 @@
 
   # Shell utilities
   home.packages = with pkgs; [
-    fastfetch
-    ripgrep
-    fzf
-    zoxide
-    eza
-    bat
-    home-manager
+    nh
+    kdePackages.kcalc
+    firefox
+    kdePackages.kate
+    discord
+    kdePackages.yakuake
+    google-chrome
+    signal-desktop-bin
+    git
+    htop
+    element-desktop
+    cups-brother-hl1210w
+    nextcloud-client
+    libreoffice
+    tlp
+    yubico-pam
+    nheko
+    cmatrix
+    spice
+    spice-gtk
+    moonlight-qt
+    p7zip
+    vscode
+    warp-terminal
+    android-tools
+    android-udev-rules
+    btop-rocm
+    lutris
+    openshift
+    kubernetes
+    kubernetes-helm
+    jmeter
+    krita
+    openssl
+    zlib
+    libffi
+    gmp
+    slack
+    nixpkgs-review
+    gh
+    vlc
+    (wineWowPackages.full.override {
+      wineRelease = "staging";
+      mingwSupport = true;
+    })
+    winetricks
 
     # ZSH enhancements previously managed by oh-my-zsh
     zsh-git-prompt
