@@ -40,12 +40,17 @@ boot.binfmt.registrations.appimage = {
 #  users.defaultUserShell = pkgs.zsh;
 
   # Bootloader.
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [ "amdgpu" "acpi_call" "msr" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.theme = true;
   networking.hostName = "Lappen"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  boot.kernelParams = [
+    "amdgpu.runpm=0"
+    "amdgpu.dc=1"
+  ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.loader.systemd-boot.configurationLimit = 10;
@@ -75,7 +80,11 @@ boot.binfmt.registrations.appimage = {
   };
 
   services.tailscale.enable = true;
-  services.tlp.enable = true;
+  services.tlp.settings = {
+    RUNTIME_PM_ON_AC = "auto";
+    RUNTIME_PM_ON_BAT = "auto";
+    USB_AUTOSUSPEND = 1;
+  };
   services.power-profiles-daemon.enable = false;
 
   ## virtualisation
