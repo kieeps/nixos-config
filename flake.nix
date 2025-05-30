@@ -11,10 +11,17 @@
   outputs = { self, nixpkgs, home-manager, flake-utils, ... }@inputs: let
     system = "x86_64-linux";
 
-    mkPkgs = system: import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
+  mkPkgs = system: import nixpkgs {
+    inherit system;
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+        "olm-3.2.16"
+        "yubikey-manager-qt-1.2.5"
+      ];
     };
+  };
+
 
     # Optional: override unstable for both systems
     overrideUnstable = pkgs: {
