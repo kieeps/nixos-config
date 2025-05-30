@@ -38,7 +38,7 @@
 
   # Git and general tools
   programs.git.enable = true;
-  programs.btop.enable = true;
+#  programs.btop.enable = true;
   programs.neovim = {
     enable = true;
     defaultEditor = true;
