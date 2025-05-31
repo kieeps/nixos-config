@@ -52,6 +52,17 @@ boot.binfmt.registrations.appimage = {
     "amdgpu.dc=1"
   ];
 
+  systemd.services.resume-unlock = {
+    description = "Unlock KDE sessions after suspend";
+    wantedBy = [ "sleep.target" ];
+    after = [ "sleep.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.systemd}/bin/loginctl unlock-sessions";
+    };
+  };
+
+
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.loader.systemd-boot.configurationLimit = 10;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
