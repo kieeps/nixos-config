@@ -47,7 +47,12 @@ boot.binfmt.registrations.appimage = {
   networking.hostName = "Lappen"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  boot.kernelParams = [ "amdgpu.dcdebugmask=0x10" ];
+  boot.kernelParams = [
+    "mem_sleep_default=s2idle"
+    "amdgpu.aspm=0"
+    "amdgpu.runpm=0"
+  ];
+
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.loader.systemd-boot.configurationLimit = 10;
