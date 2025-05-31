@@ -40,7 +40,7 @@ boot.binfmt.registrations.appimage = {
 #  users.defaultUserShell = pkgs.zsh;
 
   # Bootloader.
-  boot.initrd.kernelModules = [ "amdgpu" "acpi_call" "msr" ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.theme = true;
