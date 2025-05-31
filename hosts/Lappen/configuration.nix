@@ -47,21 +47,7 @@ boot.binfmt.registrations.appimage = {
   networking.hostName = "Lappen"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  boot.kernelParams = [
-    "amdgpu.runpm=0"
-    "amdgpu.dc=1"
-  ];
-
-  systemd.services.resume-unlock = {
-    description = "Unlock KDE sessions after suspend";
-    wantedBy = [ "sleep.target" ];
-    after = [ "sleep.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.systemd}/bin/loginctl unlock-sessions";
-    };
-  };
-
+  boot.kernelParams = [ "amdgpu.dcdebugmask=0x10" ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.loader.systemd-boot.configurationLimit = 10;
