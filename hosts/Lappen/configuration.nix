@@ -20,6 +20,13 @@ services.logind = {
     HandleLidSwitchHibernate=ignore
   '';
 };
+  services.alloy = {
+    enable = true;
+    configPath = "/etc/alloy/config.alloy";  # or point to a Nix store file like below
+    extraFlags = [ "--config.expand-env=true" ];
+    package = pkgs.alloy;  # optional if you're happy with the default version
+  };
+
 
 boot.binfmt.registrations.appimage = {
   wrapInterpreterInShell = false;
