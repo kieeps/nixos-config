@@ -24,7 +24,7 @@ services.logind = {
     enable = true;
     configPath = "/etc/alloy/config.alloy";  # or point to a Nix store file like below
     extraFlags = [ "--config.expand-env=true" ];
-    package = pkgs.alloy;  # optional if you're happy with the default version
+    package = pkgs.grafana-alloy;  # optional if you're happy with the default version
   };
 
 
