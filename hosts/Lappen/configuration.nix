@@ -21,9 +21,13 @@ services.logind = {
   '';
 };
   services.alloy = {
+#  package = pkgs.fetchurl {
+#  url = "https://github.com/grafana/alloy/releases/download/vX.Y.Z/alloy-linux-amd64";
+#  sha256 = ""; # you need to calculate or get this
     enable = true;
     configPath = "/etc/alloy/config.alloy";  # or point to a Nix store file like below
-    extraFlags = [ "--config.expand-env=true" ];
+#    extraFlags = [ "--config.expand-env=true" ];
+    extraFlags = [ "--stability.level=public-preview" ];
     package = pkgs.grafana-alloy;  # optional if you're happy with the default version
   };
 
